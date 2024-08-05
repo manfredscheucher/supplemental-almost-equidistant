@@ -1,0 +1,104 @@
+<html>
+<head>
+<title>3D Moser Spindle</title>
+</head>
+<body >
+
+<script src="js/Three.js"></script>
+<script src="js/OrbitControls.js"></script>
+<script src="js/THREEx.WindowResize.js"></script>
+<div id="ThreeJS" style="background-color:lightgrey"></div>
+
+<script>
+init();
+animate();
+
+
+function init() 
+{
+	scene = new THREE.Scene();
+	var SCREEN_WIDTH = 640, SCREEN_HEIGHT = 480;
+	var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
+	camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
+	scene.add(camera);
+	camera.position.set(0,200,0);
+	camera.lookAt(0,0,0);		
+	renderer = new THREE.CanvasRenderer(); 
+
+	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	container = document.getElementById( 'ThreeJS' );
+	container.appendChild( renderer.domElement );
+
+	THREEx.WindowResize(renderer, camera);
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	
+	var lineMaterial = new THREE.LineBasicMaterial( { color: 0x0 } );
+
+	var p = [
+	  [-20.171028,-43.160525,32.830821],
+	  [17.870840,-23.909269,-50.000000],
+	  [-24.508227,37.063080,20.630043],
+	  [50.000000,29.554955,-10.031945],
+	  [24.509038,-9.734041,-11.564762],
+	  [-16.063507,-5.645529,5.131812],
+	  [-50.000000,-17.070164,-22.069394],
+	  [47.699763,-50.000000,4.900093],
+	  [-13.161673,50.000000,-41.500084],
+	  [36.553272,6.515921,50.000000],
+	];
+
+	function line(i,j) {
+	  var lineGeometry = new THREE.Geometry();
+	  var vertArray = lineGeometry.vertices;
+	  vertArray.push( new THREE.Vector3(p[i][0],p[i][1],p[i][2]), new THREE.Vector3(p[j][0],p[j][1],p[j][2]) );
+	  var line = new THREE.Line( lineGeometry, lineMaterial );
+	  scene.add(line);
+	}
+
+	line(0,2);
+	line(0,4);
+	line(0,6);
+	line(0,7);
+	line(0,9);
+	line(1,3);
+	line(1,5);
+	line(1,6);
+	line(1,7);
+	line(1,8);
+	line(2,4);
+	line(2,6);
+	line(2,8);
+	line(2,9);
+	line(3,5);
+	line(3,7);
+	line(3,8);
+	line(3,9);
+	line(4,6);
+	line(4,8);
+	line(4,9);
+	line(5,7);
+	line(5,8);
+	line(5,9);
+	line(6,8);
+	line(7,9);
+}
+
+function animate() 
+{
+	requestAnimationFrame( animate );
+	render();		
+	update();
+}
+
+function update()
+{
+	controls.update();
+}
+
+function render() 
+{
+	renderer.render( scene, camera );
+}
+</script>
+</body>
+</html>
