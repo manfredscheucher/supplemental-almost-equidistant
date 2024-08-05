@@ -2,7 +2,7 @@
 
 This website contains a program and supplementary data that were used in the proofs of some of the results in
 
-*   _Almost-equidistant sets_ (M. Balko, A. Pór, M. Scheucher, K. Swanepoel, and P. Valtr), in preparation (2017).
+*   _Almost-equidistant sets_ (M. Balko, A. Pór, M. Scheucher, K. Swanepoel, and P. Valtr)
 
 ## Abstract
 
